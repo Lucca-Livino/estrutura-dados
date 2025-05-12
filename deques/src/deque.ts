@@ -3,13 +3,61 @@ export class deque<T>{
     fim: number;
     arr:(T | undefined)[];
     tamanho: number;
+    capacidade: number;
 
     constructor(capacidade:number){
         this.inicio = 0;
         this.fim = 0
         this.arr = new Array(capacidade+1).fill(undefined);
+        this.capacidade = capacidade;
+        this.tamanho = 0
 
     }
+    
+    private incrementar(cont: number) {
+        return (cont + 1) % this.arr.length;
+    }
+
+    private decermentar(cont: number) {
+    return (cont - 1 + this.arr.length) % this.arr.length;
+  }
+
+    isFull(): boolean {
+        return this.tamanho >= this.capacidade
+    }
+    
+    isEmpty(): boolean{
+        return this.tamanho === 0
+    }
+
+    
+
+    addFirst(item: T): void{
+        if(this.isFull()){
+            this.resize()
+        }
+
+        if (this.inicio == this.fim) {
+            this.fim = this.incrementar(this.fim);
+        }
+
+        this.arr[this.inicio] = item;
+        this.inicio = this.decermentar(this.inicio);
+
+        console.log(`Item ${item} inserido no inicio`);
+
+    }
+
+    // addLast(item : T) {
+    //     if(this.isFull()){
+    //         this.resize()
+    //     }
+
+
+
+    // }
+
+
 
         private resize() {
         // Redimensiona o array para o dobro do tamanho
@@ -32,9 +80,6 @@ export class deque<T>{
         }
     }
 
-    private incrementar(cont: number) {
-        return (cont + 1) % this.arr.length;
-    }
 
 
 }
