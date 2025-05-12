@@ -1,5 +1,5 @@
 //T: elemento genérico para permitir que a pilha armazene elementos de qualquer tipo
-export class pilha<T> {
+export class Pilha<T> {
     //Criando um array de nome items
     private items: T[] = []
 
